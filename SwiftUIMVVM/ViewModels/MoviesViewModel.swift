@@ -10,18 +10,14 @@ import Foundation
 
 class MoviesViewModel: ObservableObject {
 
-    var apimanager = ApiManager()
+    var apimanager = Apimanager()
     @Published var showActivityIndicator: Bool = false
     @Published var moviesList = [MoviesModels.Movie]()
-    
+
     func getMoviesList() {
         self.showActivityIndicator = true
-        var userid = ""
-        guard let userId = UserDefaults.standard.value(forKey: "login_id") as? Int else {
-           return
-        }
-        userid = String(userId)
-        apimanager.getMethod(url: Constants.Apiurl.moviesListUrl + "/" + userid, aSuccess: { (jsonData) in
+     
+        apimanager.getMethod(url: Constants.Apiurl.moviesListUrl + "/" + String(KeyChain.getUserId()), success: { (jsonData) in
                 do {
                     let results = try JSONDecoder().decode(MoviesModels.MoviesList.self, from: jsonData)
                  //   print("results",results.data)

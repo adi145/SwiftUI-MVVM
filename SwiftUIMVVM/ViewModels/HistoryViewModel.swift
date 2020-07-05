@@ -10,18 +10,14 @@ import Foundation
 
 class HistoryViewModel: ObservableObject {
     
-    var apimanager = ApiManager()
+    var apimanager = Apimanager()
     @Published var showActivityIndicator: Bool = false
     @Published var bookedMoviesList = [HistoryModel.BookedMovie]()
     
     func getBookedMoviesList() {
         self.showActivityIndicator = true
-        var userid = ""
-        guard let userId = UserDefaults.standard.value(forKey: "login_id") as? Int else {
-            return
-        }
-        userid = String(userId)
-        apimanager.getMethod(url: Constants.Apiurl.bookMovieUrl + "/" + userid, aSuccess: { (jsonData) in
+       let userid = String(KeyChain.getUserId())
+        apimanager.getMethod(url: Constants.Apiurl.bookMovieUrl + "/" + userid, success: { (jsonData) in
                 do {
                     let results = try JSONDecoder().decode(HistoryModel.BookedMoviesList.self, from: jsonData)
                     print("results",results.data)

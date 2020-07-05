@@ -94,24 +94,24 @@ struct LoginView: View{
                 self.username = ""
                 self.password = ""
                 
-                let username = "Adi2513"
-                let data = Data(from: username)
-                KeyChain.save(key: "username", data: data)
-
-                if let receivedData = KeyChain.load(key: "username") {
-                    let result = receivedData.to(type: String.self)
-                    print("result: ", result)
-                }
-                if let receivedData = KeyChain.load(key: "username") {
-                                let result = receivedData.to(type: String.self)
-                                print("result: ", result)
-                            }
-                KeyChain.remove(key: "username")
-                
-                if let receivedData = KeyChain.load(key: "username") {
-                    let result = receivedData.to(type: String.self)
-                    print("result: ", result)
-                }
+//                let username = "Adi2513"
+//                let data = Data(from: username)
+//                KeyChain.save(key: "username", data: data)
+//
+//                if let receivedData = KeyChain.load(key: "username") {
+//                    let result = receivedData.to(type: String.self)
+//                    print("result: ", result)
+//                }
+//                if let receivedData = KeyChain.load(key: "username") {
+//                                let result = receivedData.to(type: String.self)
+//                                print("result: ", result)
+//                            }
+//                KeyChain.remove(key: "username")
+//
+//                if let receivedData = KeyChain.load(key: "username") {
+//                    let result = receivedData.to(type: String.self)
+//                    print("result: ", result)
+//                }
                 
             }.onDisappear() {
                 

@@ -10,13 +10,13 @@ import SwiftUI
 
 class LoginViewModel: ObservableObject {
     
-    var apimanager = ApiManager()
+    var apimanager = Apimanager()
     @Published var loginResponse = LoginModel.LoginResponse(message: "", data: LoginModel.UserData(id: -1, name: "", email: "", mobileNumber: "", password: "", companyName: "", address: ""))
     @Published var showActivityIndicator: Bool = false
     @Published var loginValidation: Bool = false
     var userProfilePlaceHolderList = ["User name", "Email", "Mobile number","Company name", "Address"]
     @Published var userProfileData = ["", "", "","", ""]
-    
+
     func loginVlidation(username:String, password:String){
         if username != "" && password != "" {
             let request = LoginModel.LoginRequest(username: username, password: password)
@@ -32,10 +32,9 @@ class LoginViewModel: ObservableObject {
     func login(request: LoginModel.LoginRequest?) {
         self.showActivityIndicator = true
         let parameterDictionary = ["email" : request!.username, "password" : request!.password]
-        apimanager.postAction(url: Constants.Apiurl.loginUrl, param: parameterDictionary, aSuccess: { (data) in
-            if let safeData = data {
+        apimanager.postAction(url: Constants.Apiurl.loginUrl, param: parameterDictionary, success: { (jsondata) in
                 do {
-                    let results = try JSONDecoder().decode(LoginModel.LoginResponse.self, from: safeData)
+                    let results = try JSONDecoder().decode(LoginModel.LoginResponse.self, from: jsondata)
                     print("results",results)
                     
                     DispatchQueue.main.async {
@@ -50,26 +49,18 @@ class LoginViewModel: ObservableObject {
                     }
                     print("login error +++++++++")
                 }
-            }
-        }, aFailure: { (errormessage) in
+        }, failure: { (errormessage) in
             print("login error message",errormessage ?? "")
             DispatchQueue.main.async {
                 self.showActivityIndicator = false
             }
         })
     }
-    func getUserId() -> String {
-        var userid = ""
-        guard let userId = UserDefaults.standard.value(forKey: "login_id") as? Int else {
-            return ""
-        }
-        userid = String(userId)
-        return userid
-    }
+
     func getUserProfileData() {
         self.showActivityIndicator = true
         
-        apimanager.getMethod(url: Constants.Apiurl.getUserProfileUrl + "/" + getUserId(), aSuccess: { (jsonData) in
+        apimanager.getMethod(url: Constants.Apiurl.getUserProfileUrl + "/" + String(KeyChain.getUserId()), success: { (jsonData) in
             do {
                 let results = try JSONDecoder().decode(LoginModel.LoginResponse.self, from: jsonData)
                 print("results",results.data)
@@ -95,17 +86,15 @@ class LoginViewModel: ObservableObject {
     func profileUpdate() {
         self.showActivityIndicator = true
         let parameterDictionary = ["name":self.userProfileData[0], "email" : self.userProfileData[1], "mobile_number":self.userProfileData[2], "password" : self.loginResponse.data.password,"company_name":self.userProfileData[3],"address":self.userProfileData[4]]
-        apimanager.postAction(url: Constants.Apiurl.updateUserProfileUrl + getUserId(), param: parameterDictionary, aSuccess: { (data) in
-            if let safeData = data {
+        apimanager.postAction(url: Constants.Apiurl.updateUserProfileUrl + String(KeyChain.getUserId()), param: parameterDictionary, success: { (jsonData) in
                 do {
-                    let results = try JSONDecoder().decode(LoginModel.LoginResponse.self, from: safeData)
+                    let results = try JSONDecoder().decode(LoginModel.LoginResponse.self, from: jsonData)
                     print("results",results)
                     self.getUserProfileData()
                 } catch {
                     print(error)
                 }
-            }
-        }, aFailure: { (errormessage) in
+        }, failure: { (errormessage) in
             print("login error message",errormessage ?? "")
             DispatchQueue.main.async {
                 self.showActivityIndicator = false

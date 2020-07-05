@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 
 class SingupViewModel: ObservableObject {
-    var apimanager = ApiManager()
+    var apimanager = Apimanager()
     @Published var showActivityIndicator: Bool = false
     @Published var singupValidation: Bool = false
     @Published var singupSuccess: Bool = false
@@ -30,12 +30,12 @@ class SingupViewModel: ObservableObject {
 
     func signupRequest(request: SingupModel.SignupRequest) {
         let parameterDictionary = ["name":request.name, "email" : request.email, "password" : request.password, "mobile_number":request.mobileNumber, "company_name":request.companyName, "address": request.address]
-        apimanager.postAction(url: Constants.Apiurl.signupUrl, param: parameterDictionary, aSuccess: { (data) in
+        apimanager.postAction(url: Constants.Apiurl.signupUrl, param: parameterDictionary, success: { (data) in
             DispatchQueue.main.async {
                  self.showActivityIndicator = false
                  self.singupSuccess = true
             }
-        }, aFailure: { (errormessage) in
+        }, failure: { (errormessage) in
             print("Singup error message",errormessage ?? "")
             DispatchQueue.main.async {
                 self.showActivityIndicator = false

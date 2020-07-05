@@ -9,24 +9,20 @@
 import Foundation
 
 class MovieDetailsViewModel: ObservableObject {
-    var apimanager = ApiManager()
+    var apimanager = Apimanager()
     @Published var showActivityIndicator = false
     @Published var bookedTicketConfirm: Bool = false
 
     func bookMovie(movieId : String) {
        
         self.showActivityIndicator = true
-        var userid = ""
-        guard let userId = UserDefaults.standard.value(forKey: "login_id") as? Int else {
-                return
-        }
-        userid = String(userId)
+        let userid = String(KeyChain.getUserId())
         let params = ["user_id" : userid, "movie_id" : movieId]
-        apimanager.postAction(url: Constants.Apiurl.bookMovieUrl, param: params, aSuccess: { (data) in
+        apimanager.postAction(url: Constants.Apiurl.bookMovieUrl, param: params, success: { (data) in
             DispatchQueue.main.async {
                self.bookedTicketConfirm = true
             }
-        }, aFailure: { (errormessage) in
+        }, failure: { (errormessage) in
             print(errormessage)
             DispatchQueue.main.async {
                 self.bookedTicketConfirm = false
