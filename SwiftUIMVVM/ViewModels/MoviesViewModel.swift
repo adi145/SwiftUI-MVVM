@@ -17,21 +17,29 @@ class MoviesViewModel: ObservableObject {
     func getMoviesList() {
         self.showActivityIndicator = true
      
-        apimanager.getMethod(url: Constants.Apiurl.moviesListUrl + "/" + String(KeyChain.getUserId()), success: { (jsonData) in
+        apimanager.getMethod(url: Constants.Apiurl.baseUrl + Constants.Apiurl.moviesListUrl + "/" + SaveUser.getUserId(), success: { (jsonData) in
                 do {
                     let results = try JSONDecoder().decode(MoviesModels.MoviesList.self, from: jsonData)
-                 //   print("results",results.data)
                     DispatchQueue.main.async {
                         self.moviesList.removeAll()
                         self.moviesList = results.data
-                        self.showActivityIndicator = false
+                        self.hideActivityIndicator()
                     }
                 } catch {
+                    self.hideActivityIndicator()
                     print(error)
-                    self.showActivityIndicator = false
                 }
         }) { (error) in
             print("moviles list",error ?? "")
+            self.hideActivityIndicator()
+        }
+    }
+    
+    func showActivityIndicatorCallingApi() {
+        self.showActivityIndicator = true
+    }
+    func hideActivityIndicator() {
+        DispatchQueue.main.async {
             self.showActivityIndicator = false
         }
     }

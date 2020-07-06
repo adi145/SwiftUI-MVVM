@@ -15,9 +15,8 @@ class HistoryViewModel: ObservableObject {
     @Published var bookedMoviesList = [HistoryModel.BookedMovie]()
     
     func getBookedMoviesList() {
-        self.showActivityIndicator = true
-       let userid = String(KeyChain.getUserId())
-        apimanager.getMethod(url: Constants.Apiurl.bookMovieUrl + "/" + userid, success: { (jsonData) in
+        self.showActivityIndicatorCallingApi()
+        apimanager.getMethod(url: Constants.Apiurl.baseUrl + Constants.Apiurl.bookMovieUrl + "/" + SaveUser.getUserId(), success: { (jsonData) in
                 do {
                     let results = try JSONDecoder().decode(HistoryModel.BookedMoviesList.self, from: jsonData)
                     print("results",results.data)
@@ -34,7 +33,9 @@ class HistoryViewModel: ObservableObject {
             self.hideActivityIndicator()
         }
     }
-    
+    func showActivityIndicatorCallingApi() {
+           self.showActivityIndicator = true
+       }
     func hideActivityIndicator() {
         DispatchQueue.main.async {
             self.showActivityIndicator = false

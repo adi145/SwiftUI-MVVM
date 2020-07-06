@@ -31,7 +31,8 @@ struct ImageViewContainer: View {
 class RemoteImageURL: ObservableObject {
     @Published var data = Data()
     init(imageURL: String) {
-        guard let url = URL(string: imageURL) else { return }
+        let imageUrl1 = Constants.Apiurl.baseUrl + imageURL
+        guard let url = URL(string: imageUrl1) else { return }
 
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data else { return }

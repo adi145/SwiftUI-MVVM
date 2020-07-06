@@ -37,8 +37,8 @@
 		749E961524A59C9C009243B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 749E961424A59C9C009243B4 /* Assets.xcassets */; };
 		749E961824A59C9C009243B4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 749E961724A59C9C009243B4 /* Preview Assets.xcassets */; };
 		749E961B24A59C9C009243B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 749E961924A59C9C009243B4 /* LaunchScreen.storyboard */; };
-		85140E7524B1F3F900F5438A /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85140E7424B1F3F800F5438A /* KeyChain.swift */; };
 		85140E7824B1F42600F5438A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85140E7724B1F42600F5438A /* Security.framework */; };
+		85AF5A5724B3070C00040BB1 /* SaveUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AF5A5624B3070C00040BB1 /* SaveUser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,8 +75,8 @@
 		749E961724A59C9C009243B4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		749E961A24A59C9C009243B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		749E961C24A59C9C009243B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		85140E7424B1F3F800F5438A /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		85140E7724B1F42600F5438A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		85AF5A5624B3070C00040BB1 /* SaveUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveUser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,7 +154,7 @@
 			children = (
 				7426D64824AC606B0070E135 /* Constants.swift */,
 				7418E54924AE1DAF0074F97B /* UserSettings.swift */,
-				85140E7424B1F3F800F5438A /* KeyChain.swift */,
+				85AF5A5624B3070C00040BB1 /* SaveUser.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -283,6 +283,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85AF5A5724B3070C00040BB1 /* SaveUser.swift in Sources */,
 				746750D524A5E16600B84ABD /* ActivityIndicator.swift in Sources */,
 				7426D63B24AB72640070E135 /* SingupViewModel.swift in Sources */,
 				749E960F24A59C95009243B4 /* AppDelegate.swift in Sources */,
@@ -308,7 +309,6 @@
 				746750DB24A63BDF00B84ABD /* SingupView.swift in Sources */,
 				7426D64124AC2F750070E135 /* UserProfile.swift in Sources */,
 				7484813D24A9DE2900839D7A /* Home.swift in Sources */,
-				85140E7524B1F3F900F5438A /* KeyChain.swift in Sources */,
 				7426D64324AC30ED0070E135 /* MoviesModel.swift in Sources */,
 				746750D724A5EAD800B84ABD /* CustomTextField.swift in Sources */,
 			);

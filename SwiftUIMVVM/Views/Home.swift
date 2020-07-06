@@ -57,7 +57,8 @@ struct Home: View {
     
     var navigationBarButton: some View {
      Button(action: {
-        UserDefaults.standard.set("", forKey: "login")
+        SaveUser.remove(key: SaveUser.login_username)
+       // UserDefaults.standard.set("", forKey: "login")
         self.settings.isNavigateToHomeScreen = false
       }) {
           Text("Logout").foregroundColor(.red)

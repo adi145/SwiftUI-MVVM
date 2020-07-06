@@ -26,20 +26,13 @@ struct LoginView: View{
     }
     
     func checkUserLogin() -> Bool {
-        if let receivedData = KeyChain.load(key: "login") {
-            let userlogin = receivedData.to(type: String.self)
-            print("result: ", userlogin)
-            if userlogin != "" {
-                return true
-            }
+        let userlogin = SaveUser.get(key: SaveUser.login_username)
+        print(userlogin)
+        if userlogin != "" {
+            return true
+        } else {
+            return false
         }
-//        if let userlogin = UserDefaults.standard.object(forKey: "login") as? String{
-//            print(userlogin)
-//            if userlogin != "" {
-//                return true
-//            }
-//        }
-        return false
     }
 
     func navigateToHomeScreen() -> some View {

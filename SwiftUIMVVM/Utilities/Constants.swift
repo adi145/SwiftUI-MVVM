@@ -10,12 +10,13 @@ import Foundation
 
 struct Constants {
     struct Apiurl {
-       static var loginUrl = "http://localhost:1010/users/login"
-       static var signupUrl = "http://localhost:1010/users/user"
-       static var moviesListUrl = "http://localhost:1010/allMovies/"
-       static var imageDownloadUrl = "http://localhost:1010/downloadFile/"
-       static var bookMovieUrl = "http://localhost:1010/booked"
-       static var getUserProfileUrl = "http://localhost:1010/users/"
-       static var updateUserProfileUrl = "http://localhost:1010/users/update/"
+       static var baseUrl = "http://localhost:1010"
+       static var loginUrl = "/users/login"
+       static var signupUrl = "/users/user"
+       static var moviesListUrl = "/allMovies/"
+       static var imageDownloadUrl = "/downloadFile/"
+       static var bookMovieUrl = "/booked"
+       static var getUserProfileUrl = "/users/"
+       static var updateUserProfileUrl = "/users/update/"
     }
 }

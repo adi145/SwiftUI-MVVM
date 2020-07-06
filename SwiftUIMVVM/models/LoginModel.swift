@@ -8,10 +8,10 @@
 
 import Foundation
 
-struct LoginModel {
+struct LoginModel: Codable {
     
-    struct LoginRequest {
-        let username:String
+    struct LoginRequest:Encodable {
+        let email:String
         let password: String
     }
    

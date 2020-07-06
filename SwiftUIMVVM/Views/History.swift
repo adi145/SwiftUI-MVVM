@@ -17,7 +17,6 @@ struct History: View {
         ZStack{
            List {
                ForEach(historyViewModel.bookedMoviesList) { bookedMovies in
-               //    NavigationLink(destination: MovieDetails(movieDetails: movie)) {
                        HStack {
                            HStack{
                                ImageViewContainer(imageUrl:  Constants.Apiurl.imageDownloadUrl + bookedMovies.movieID, imageWidth: 100, imageHeight: 100 ).clipShape(Circle())
@@ -35,7 +34,6 @@ struct History: View {
                         }
                            .padding(.leading, CGFloat(0.0))
                        }
-                  // }
                }.onDelete(perform: self.delete(at:))
            }
             ActivityIndicator(isAnimating: .constant(self.historyViewModel.showActivityIndicator), style: .large).frame(width: UIScreen.screenWidth/2, height: UIScreen.screenHeight/2, alignment: .center)
